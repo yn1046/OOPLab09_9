@@ -8,7 +8,7 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
@@ -25,6 +25,16 @@
                 <MenuItem Header="Font" x:Name="Font" />
                 <MenuItem Header="Color" x:Name="Color" />
             </MenuItem>
+            <ToggleButton x:Name="Bold" Command="EditingCommands.ToggleBold" Padding="0">
+                <Image Source="pack://application:,,,/b.png" />
+            </ToggleButton>
+            <ToggleButton x:Name="Italic" Command="EditingCommands.ToggleItalic" Padding="0">
+                <Image Source="pack://application:,,,/i.png" />
+            </ToggleButton>
+            <ToggleButton x:Name="Underlined" Command="EditingCommands.ToggleUnderline" Padding="0">
+                <Image Source="pack://application:,,,/u.png" />
+            </ToggleButton>
+
         </Menu>
         <RichTextBox Grid.Row="1" x:Name="textBox" />
     </Grid>
