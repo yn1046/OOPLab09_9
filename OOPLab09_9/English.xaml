@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:OOPLab09_9;assembly=mscorlib"
+                    xmlns:OOPLab09_9="clr-namespace:System;assembly=mscorlib">
+
+    <OOPLab09_9:String x:Key="File">File</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="New">New</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Save">Save</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Open">Open</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Edit">Edit</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Undo">Undo</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Redo">Redo</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Copy">Copy</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Paste">Paste</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Font">Font</OOPLab09_9:String>
+    <OOPLab09_9:String x:Key="Color">Color</OOPLab09_9:String>
+</ResourceDictionary>

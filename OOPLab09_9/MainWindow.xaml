@@ -12,18 +12,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
-            <MenuItem Header="_File" x:Name="File">
-                <MenuItem Header="_New" x:Name="New" Command="{Binding Path=NewCommand}" />
-                <MenuItem Header="_Save" x:Name="Save" Command="{Binding Path=SaveCommand}" />
-                <MenuItem Header="_Open" x:Name="Open" Command="{Binding Path=OpenCommand}" />
+            <MenuItem Header="{DynamicResource File}" x:Name="File">
+                <MenuItem Header="{DynamicResource New}" x:Name="New" Command="{Binding Path=NewCommand}" />
+                <MenuItem Header="{DynamicResource Save}" x:Name="Save" Command="{Binding Path=SaveCommand}" />
+                <MenuItem Header="{DynamicResource Open}" x:Name="Open" Command="{Binding Path=OpenCommand}" />
             </MenuItem>
-            <MenuItem Header="_Edit" x:Name="Edit">
-                <MenuItem Header="_Undo" x:Name="Undo" Command="Undo" />
-                <MenuItem Header="_Redo" x:Name="Redo" Command="Redo" />
-                <MenuItem Header="_Copy" x:Name="Copy" Command="Copy" />
-                <MenuItem Header="_Paste" x:Name="Paste" Command="Paste" />
-                <MenuItem Header="Font" x:Name="Font" />
-                <MenuItem Header="Color" x:Name="Color" />
+            <MenuItem Header="{DynamicResource Edit}" x:Name="Edit">
+                <MenuItem Header="{DynamicResource Undo}" x:Name="Undo" Command="Undo" />
+                <MenuItem Header="{DynamicResource Redo}" x:Name="Redo" Command="Redo" />
+                <MenuItem Header="{DynamicResource Copy}" x:Name="Copy" Command="Copy" />
+                <MenuItem Header="{DynamicResource Paste}" x:Name="Paste" Command="Paste" />
+                <MenuItem Header="{DynamicResource Font}" x:Name="Font" Command="{Binding Path=FontCommand}" />
+                <MenuItem Header="{DynamicResource Color}" x:Name="Color" Command="{Binding Path=ColorCommand}" />
             </MenuItem>
             <ToggleButton x:Name="Bold" Command="EditingCommands.ToggleBold" Padding="0">
                 <Image Source="pack://application:,,,/b.png" />
@@ -34,6 +34,7 @@
             <ToggleButton x:Name="Underlined" Command="EditingCommands.ToggleUnderline" Padding="0">
                 <Image Source="pack://application:,,,/u.png" />
             </ToggleButton>
+            <ToggleButton x:Name="SwitchLang" Command="{Binding Path=SwitchCommand}" Content="RU/EN" Padding="0"/>
 
         </Menu>
         <RichTextBox Grid.Row="1" x:Name="textBox" />

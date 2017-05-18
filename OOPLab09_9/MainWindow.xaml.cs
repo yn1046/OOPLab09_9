@@ -25,15 +25,28 @@ namespace OOPLab09_9
         public ICommand NewCommand { get; set; }
         public ICommand OpenCommand { get; set; }
         public ICommand SaveCommand { get; set; }
+        public ICommand FontCommand { get; set; }
+        public ICommand ColorCommand { get; set; }
+        public ICommand SwitchCommand { get; set; }
+
+        public Uri Russian { get; set; }
+        public Uri English { get; set; }
 
         public static int Num { get; set; }
 
         public MainWindow()
         {
+            Resources = new ResourceDictionary();
+            English = new Uri("pack://application:,,,/English.xaml");
+            Russian = new Uri("pack://application:,,,/Russian.xaml");
+            Resources.Source = English;
             InitializeComponent();
             NewCommand = new DelegateCommand(OpenNew);
             OpenCommand = new DelegateCommand(DoOpen);
             SaveCommand = new DelegateCommand(DoSave);
+            FontCommand = new DelegateCommand(ShowFontDialog);
+            ColorCommand = new DelegateCommand(ShowColorDialog);
+            SwitchCommand = new DelegateCommand(DoLangSwitch);
             DataContext = this;
             if (Num == 0) Num = 1;
         }
@@ -77,6 +90,47 @@ namespace OOPLab09_9
                 textBox.Document.ContentEnd);
                 range.Save(fileStream, DataFormats.Rtf);
             }
+        }
+
+        public void ShowFontDialog()
+        {
+            var fd = new System.Windows.Forms.FontDialog();
+            var result = fd.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                var tr = new TextRange(textBox.Selection.Start, textBox.Selection.End);
+
+                tr.ApplyPropertyValue(TextElement.FontFamilyProperty, new FontFamily(fd.Font.Name));
+                tr.ApplyPropertyValue(TextElement.FontSizeProperty, fd.Font.Size * 96.0 / 72.0);
+                tr.ApplyPropertyValue(TextElement.FontWeightProperty, textBox.FontWeight = fd.Font.Bold ? FontWeights.Bold : FontWeights.Regular);
+                tr.ApplyPropertyValue(TextElement.FontStyleProperty, fd.Font.Italic ? FontStyles.Italic : FontStyles.Normal);
+
+                TextDecorationCollection tdc = new TextDecorationCollection();
+                if (fd.Font.Underline) tdc.Add(TextDecorations.Underline);
+                else tr.ApplyPropertyValue(Inline.TextDecorationsProperty, null);
+                if (fd.Font.Strikeout) tdc.Add(TextDecorations.Strikethrough);
+                else tr.ApplyPropertyValue(Inline.TextDecorationsProperty, null);
+                tr.ApplyPropertyValue(Inline.TextDecorationsProperty, tdc);
+            }
+
+        }
+
+        public void ShowColorDialog()
+        {
+            var cd = new System.Windows.Forms.ColorDialog();
+            var result = cd.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                var tr = new TextRange(textBox.Selection.Start, textBox.Selection.End);
+                tr.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(System.Windows.Media.Color.FromArgb(cd.Color.A, cd.Color.R, cd.Color.G, cd.Color.B)));
+            }
+        }
+
+        public void DoLangSwitch()
+        {
+            if (Resources.Source.AbsolutePath.Equals(Russian.AbsolutePath)) Resources.Source = English;
+            else if (Resources.Source.AbsolutePath.Equals(English.AbsolutePath)) Resources.Source = Russian;
+            InitializeComponent();
         }
     }
 }
